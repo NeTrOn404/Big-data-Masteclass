@@ -1,0 +1,4 @@
+what do you mean by Object
+what do you know about Java
+what is Java Virtual Machine
+How Java enabled High Performance
