@@ -1,0 +1,171 @@
+#create table dept:
+CREATE TABLE Departments (DepartmentID int, Name varchar(20), Managerld int);
+insert dummies:
+INSERT INTO Departments(DepartmentID, Name, ManagerId) VALUES (1, 'Engineering', 12);
+INSERT INTO Departments(DepartmentID, Name, ManagerId) VALUES (2, 'Design', 4);
+INSERT INTO Departments(DepartmentID, Name, ManagerId) VALUES (3, 'Marketing', 2);
+
+Show All :
+SELECT * FROM Departments
+
+Drop It :
+DROP table Departments
+
++10 :
+SELECT DepartmentID, Name, ManagerID + 10 FROM Departments
+
+Alias:
+SELECT DepartmentID, Name, ManagerID + 10 as NewManagerID FROM Departments
+
+Null:
+
+Concatenate:
+SELECT DepartmentID || ' ' || Name AS Department, ManagerID FROM Departments
+.is:
+SELECT DepartmentID || " . is " || Name AS Department, ManagerID FROM Departments
+
+Duplicates :
+before:
+SELECT DepartmentID FROM Departments
+after:
+SELECT DISTINCT DepartmentID FROM Departments
+
+union(remove duplicates and takes more excution time):
+SELECT FirstName AS Name FROM Employees
+UNION
+SELECT LastName AS Name FROM Employees
+
+union all(with no removing duplicates):
+SELECT FirstName AS Name FROM Employees
+UNION ALL
+SELECT LastName AS Name FROM Employees
+
+Coditions:
+
+Where (= < > <= >=):
+SELECT LastName, EmployeeID
+FROM Employees WHERE
+EmployeeID = 1
+
+SELECT ProductName, Price FROM Products
+WHERE Price <= 5
+
+Between:
+SELECT ProductName, Price FROM Products WHERE Price between 5 and 10
+
+IN:
+SELECT ProductName, Price FROM Products WHERE Price IN (6, 9, 12)
+
+Not IN:
+SELECT ProductName, Price FROM Products WHERE Price NOT IN (6, 9, 12)
+
+LIKE:
+%:
+SELECT ProductName, Price FROM Products WHERE ProductName LIKE 'B%'
+
+SELECT ProductName, Price FROM Products
+ WHERE ProductName LIKE '%ll%' 
+ AND LastNme LIKE '%lle%'
+_:
+SELECT ProductName, Price FROM Products WHERE ProductName LIKE 'K_n%’
+
+NULL:
+SELECT LastName, FirstName FROM Employees
+WHERE LastName IS NOT NULL
+
+SELECT LastName, FirstName FROM Employees
+WHERE LastName IS NULL
+
+SELECT IFNULL(EmployeeID,0) FROM [Employees]			Not working
+where IFNULL(EnployeeID,0) = IFNULL(EmployeeID, 0)
+
+NOT, OR and AND operators and brackets :
+SELECT FirstName, LastName FROM Employees			No result
+WHERE EmployeeID >= 50 AND LastName LIKE 'C%'
+
+SELECT LastName FROM Employees
+WHERE EmployeeID IS NOT NULL OR LastName LIKE '%so_'
+
+SELECT LastName FROM Employees
+WHERE NOT (EmployeeID = 3 OR EmployeeID = 4)
+
+SELECT FirstName, LastName FROM Employees
+WHERE (EmployeeID = 3 OR EmployeeID = 4) AND
+(EmployeeID IS NOT NULL)
+
+Sorting:
+SELECT LastName, BirthDate FROM Employees ORDER BY BirthDate
+
+SELECT LastName, BirthDate FROM Employees ORDER BY BirthDate DESC
+
+SUB-Query:
+SELECT FN || " " || LN FROM
+(SELECT FirstName as FN, LastName as LN FROM Employees
+WHERE EmployeeID >= 3 AND LastName LIKE '%');
+
+Joins:
+most joins works only locally as it's has no relations with added tables
+
+Inner:
+SELECT e.LastName, e.DepartmentID, d.Name AS DepartmentName
+FROM Employees e
+INNER JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+didn't work in w3school so i needed to put foregin key in employee to work but
+it didn't so i import it locally to make it work.
+
+LEFT Outer:
+SELECT e.LastName, e.DepartmentID, d.Name AS
+DepartmentName
+FROM Employees e
+LEFT JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+
+Right Outer:
+SELECT e.LastName, e.DepartmentID, d.Name AS
+DepartmentName
+FROM Employees e
+RIGHT JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+
+Full Outer:
+SELECT e.LastName, e.DepartmentID, d.Name AS
+DepartmentName
+FROM Employees e
+FULL OUTER JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+
+THree way join:			works locally with maded dummies
+
+SELECT
+
+e.FirstName, e.LastName, t.Name as Towns, a.AddressText
+
+FROM
+
+Employees e
+JOIN Addresses a
+
+ON e.AddressID = a.AddressID
+
+JOIN Towns t
+
+ON a.TownID = t.TownID
+
+Self Join:
+SELECT
+e.FirstName || “ “ || e.LastName || “ is managed by “ || m.LastName as
+Message
+FROM Employees e JOIN Employees m
+ON (e.ManagerId = m.EmployeeId) 
+
+Group By:
+SELECT country, count(1) from Customers group by country
+
+SELECT city, count(1) from Customers group by city;
+
+SELECT city, count(1) from Customers group by city order by count(1) desc;
+
+SELECT city, count(1) from Customers group by city HAVING count(1) >= 4 order by count(1) desc
+
+
