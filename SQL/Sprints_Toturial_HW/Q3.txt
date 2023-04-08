@@ -1,0 +1,22 @@
+Problem:
+2- Find the names of the 10 employees who sold the highest quantity of sales, in “Beverages”
+Category, and order them in descending order showing the highest first.
+
+Note:
+- The rest should be Employee_FirstName, Employee_LastName, Sold_Most_Beverages
+- You can google any syntax you want
+
+
+Solution:
+SELECT Employee_FirstName, Employee_LastName, SUM(Quantity) Total_Quantity
+FROM (
+SELECT employees.FirstName AS Employee_FirstName, employees.lastname AS Employee_LastName, orders.orderID, orderdetails.Quantity
+FROM [Orders]
+INNER JOIN [employees] ON [Orders].employeeID = [employees].employeeID
+INNER JOIN [orderdetails] ON [Orders].orderID = [orderdetails].orderID
+INNER JOIN [products] on [products].productID = [orderdetails].ProductID
+INNER JOIN [categories] on [categories].categoryID = [products].categoryID
+WHERE [categories].CategoryName = 'Beverages'
+)
+GROUP BY Employee_FirstName, Employee_LastName
+ORDER BY Total_quantity desc

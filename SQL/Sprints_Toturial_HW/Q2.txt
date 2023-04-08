@@ -1,0 +1,17 @@
+Problem:
+1- Find the names of the top 10 employees who sold the most number of orders, and order
+them in descending order showing the highest first.
+
+Note:
+- The rest should be Employee_FirstName, Employee_LastName, Number_of_Orders
+- You can google any syntax you want
+
+
+Solution:
+SELECT employees.FirstName AS Employee_FirstName, employees.lastname AS
+Employee_LastName, count(orders.orderID) AS Number_of_orders
+FROM [Orders]
+INNER JOIN [employees] on [Orders].employeeID = [employees].employeeID
+GROUP BY employees.employeeid
+ORDER BY count(orders.orderid) desc
+LIMIT 10

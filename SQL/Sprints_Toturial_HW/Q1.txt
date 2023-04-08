@@ -1,0 +1,24 @@
+Problem:
+Find the names of the top 10 customers who spent the most money,
+and order them showing the highest first, the result should look like
+the below:
+
+Note:
+- Round the total_sales to 2 decimal points
+- You can google any syntax you want
+
+
+
+Solution:
+SELECT CustomerName, round(SUM(Total_Price),2) as Total_Sales from (
+SELECT [Customers].CustomerName, [ORDERS].OrderID, [OrderDetails].ProductID,
+[OrderDetails].Quantity, [Products].Price as Price_ea, [OrderDetails].Quantity *
+[Products].Price AS Total_Price
+FROM [Customers]
+INNER JOIN [ORDERS] ON [Customers].CustomerID = [ORDERS].CustomerID
+INNER JOIN [OrderDetails] ON [ORDERS].OrderID = [OrderDetails].OrderID
+INNER JOIN [Products] ON [OrderDetails].ProductID = [Products].ProductID
+)
+group by CustomerName
+order by SUM(Total_Price) desc
+limit 10
