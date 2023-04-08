@@ -1,2 +1,3 @@
-ALL sql tutorial problems 
-i will also upload preparation problems' solution that i solved
+# SQL :
+## ALL sql tutorial problems is attached
+## i will also upload preparation problems' solution that i solved
