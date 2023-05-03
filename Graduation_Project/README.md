@@ -11,4 +11,5 @@
 #### HIVE (To load data into hive database)
 #### Cloudera HUE (To Enables Oozie and other tools)
 #### Oozie ( To creates a workflow with action needed)
+also have seen tools like airflow, flex and wworkflowmax as i had an issue in oozie casue of my machine resources.
 #### Power BI ( To visualize the outut data )
